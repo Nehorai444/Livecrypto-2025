@@ -1,0 +1,27 @@
+{
+    "appTitle": "מטבעות קריפטו בזמן אמת",
+    "englishButton": "אנגלית",
+    "spanishButton": "ספרדית",
+    "chineseButton": "סינית",
+    "hebrewButton": "עברית",
+    "menuButtonText": "תפריט",
+    "allCoinsMenuItem": "כל המטבעות",
+    "top10CoinsMenuItem": "עשרת המטבעות היקרים ביותר",
+    "searchPlaceholder": "חיפוש...",
+    "topCoinsTitle": "עשרת המטבעות היקרים ביותר",
+    "receivedTradeDataTitle": "נתוני מסחר שהתקבלו",
+    "loaderText": "טוען...",
+    "tradeTitle": "עסקה מס",
+    "symbol": "סמל",
+    "closePrice": "מחיר סגירה",
+    "openPrice": "מחיר פתיחה",
+    "highPrice": "מחיר גבוה ביותר",
+    "lowPrice": "מחיר נמוך ביותר",
+    "totalTradedBaseAssetVolume": "סך כל נפח המסחר באמצעות הנפח הבסיסי",
+    "totalTradedQuoteAssetVolume": "סך כל נפח המסחר באמצעות נפח ההצעה",
+    "startDateLabel": "תאריך התחלה",
+    "endDateLabel": "תאריך סיום",
+    "searchButton": "חיפוש",
+    "hideButtonText": "הסתר"
+  }
+  

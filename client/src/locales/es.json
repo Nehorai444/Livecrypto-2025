@@ -1,0 +1,27 @@
+{
+    "englishButton": "Inglés",
+    "spanishButton": "Español",
+    "chineseButton": "Chino",
+    "hebrewButton": "Hebreo",
+    "appTitle": "CriptoEnVivo",
+    "menuButtonText": "Menú",
+    "allCoinsMenuItem": "Todas las Monedas",
+    "top10CoinsMenuItem": "Las 10 monedas más caras",
+    "searchPlaceholder": "Buscar...",
+    "topCoinsTitle": "Las 10 Monedas Más Caras",
+    "receivedTradeDataTitle": "Datos de comercio recibidos:",
+    "loaderText": "Cargando...",
+    "tradeTitle": "Comercio",
+    "symbol": "Símbolo",
+    "closePrice": "Precio de Cierre",
+    "openPrice": "Precio de Apertura",
+    "highPrice": "Precio Más Alto",
+    "lowPrice": "Precio Más Bajo",
+    "totalTradedBaseAssetVolume": "Volumen Total Negociado de Activo Base",
+    "totalTradedQuoteAssetVolume": "Volumen Total Negociado de Activo de Cotización",
+    "startDateLabel": "Fecha de Inicio",
+    "endDateLabel": "Fecha de Fin",
+    "searchButton": "Buscar",
+    "hideButtonText": "Ocultar"
+  }
+  

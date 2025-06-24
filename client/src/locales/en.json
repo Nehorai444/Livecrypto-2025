@@ -1,0 +1,27 @@
+{
+    "englishButton": "English",
+    "spanishButton": "Español",
+    "chineseButton": "Chinese",
+    "hebrewButton": "Hebrew",
+    "appTitle": "LiveCrypto",
+    "menuButtonText": "Menu",
+    "allCoinsMenuItem": "All Coins",
+    "top10CoinsMenuItem": "Top 10 expensive coins",
+    "searchPlaceholder": "Search...",
+    "topCoinsTitle": "Top 10 Most Expensive Coins",
+    "receivedTradeDataTitle": "Received Trade Data:",
+    "loaderText": "Loading...",
+    "tradeTitle": "Trade num",
+    "symbol": "Symbol",
+    "closePrice": "Close Price",
+    "openPrice": "Open Price",
+    "highPrice": "High Price",
+    "lowPrice": "Low Price",
+    "totalTradedBaseAssetVolume": "Total Traded Base Asset Volume",
+    "totalTradedQuoteAssetVolume": "Total Traded Quote Asset Volume",
+    "startDateLabel": "Start Date",
+    "endDateLabel": "End Date",
+    "searchButton": "Search",
+    "hideButtonText": "Hide"
+  }
+  

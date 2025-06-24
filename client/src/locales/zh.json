@@ -1,0 +1,27 @@
+{
+    "englishButton": "英语",
+    "spanishButton": "西班牙语",
+    "chineseButton": "中文",
+    "hebrewButton": "希伯来语",
+    "appTitle": "实时加密",
+    "menuButtonText": "菜单",
+    "allCoinsMenuItem": "所有币种",
+    "top10CoinsMenuItem": "前10名昂贵的币种",
+    "searchPlaceholder": "搜索...",
+    "topCoinsTitle": "前10名最昂贵的币种",
+    "receivedTradeDataTitle": "收到的交易数据:",
+    "loaderText": "加载中...",
+    "tradeTitle": "交易",
+    "symbol": "交易对",
+    "closePrice": "收盘价格",
+    "openPrice": "开盘价格",
+    "highPrice": "最高价格",
+    "lowPrice": "最低价格",
+    "totalTradedBaseAssetVolume": "总交易基准资产量",
+    "totalTradedQuoteAssetVolume": "总交易报价资产量",
+    "startDateLabel": "开始日期",
+    "endDateLabel": "结束日期",
+    "searchButton": "搜索",
+    "hideButtonText": "隐藏"
+  }
+  
