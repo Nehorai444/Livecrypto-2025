@@ -15,7 +15,6 @@ function App() {
 
 
   useEffect(() => {
-    // Create a new WebSocket connection when the component mounts
     // Determine WebSocket protocol
     const wsProtocol = window.location.protocol === "https:" ? "wss://" : "ws://";
 
