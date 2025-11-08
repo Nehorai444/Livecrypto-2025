@@ -17,12 +17,9 @@ function App() {
   useEffect(() => {
     // Determine WebSocket protocol
     const wsProtocol = window.location.protocol === "https:" ? "wss://" : "ws://";
+    const wsHost = window.location.hostname;
+    const ws = new WebSocket(`${wsProtocol}${wsHost}/`);
 
-    // Determine port (if present)
-    const port = window.location.port ? `:${window.location.port}` : "";
-
-    // Construct WebSocket URL
-    const ws = new WebSocket(`${wsProtocol}${window.location.hostname}${port}`);
 
 
     ws.binaryType = 'arraybuffer'; // Set binary type for WebSocket
