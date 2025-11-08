@@ -60,7 +60,7 @@ loadCoinCache(); // Initial call to populate the cache
 
 
 // Connect to Binance WebSocket API
-const binanceWebSocket = new WebSocket('wss://ws.coincap.io/prices?assets=bitcoin,ethereum,solana');;
+const binanceWebSocket = new WebSocket('wss://stream.binance.com:9443/ws/!ticker@arr');;
 
 binanceWebSocket.on('message', async (data) => {
   try {
