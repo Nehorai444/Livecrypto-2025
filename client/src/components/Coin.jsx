@@ -1,21 +1,3 @@
-/**
- * Component for displaying detailed information about a specific cryptocurrency.
- * 
- * This component renders details such as trading pair, close price, open price,
- * high price, low price, total traded base asset volume, and total traded quote asset volume.
- * It also provides inputs for selecting start and end dates for data retrieval, and a button
- * to trigger the data search. Upon successful search, it displays a graph component with the retrieved data.
- * 
- * @module Coin
- * @param {Object} props - Props passed to the component.
- * @param {Object} val - Object containing details of the cryptocurrency.
- * @param {number} index - Index of the cryptocurrency in the list.
- * @requires react
- * @requires react-i18next
- * @requires Graph
- * @requires Loader
- * @requires ApiRequest
- */
 import React, { useState } from 'react';
 import Graph from './shelves/Graph';
 import { ApiRequest } from '../library/Utilities';
@@ -23,49 +5,59 @@ import { useTranslation } from 'react-i18next';
 import Loader from './Loader';
 import '../Index.css';
 
-
 export default function Coin(props) {
-    const [startDate, setStartDate] = useState(null);
-    const [endDate, setEndDate] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [error, setError] = useState("");
-    const { t, i18n } = useTranslation();
-    const {val, flag, index, setDataCoin, setFlag} = props.value;
-    // Function to format the price
-    function getFormatPrice(price) {
-        return new Intl.NumberFormat('en-US', {
-            style: 'currency',
-            currency: 'USD',
-        }).format(price);
-    }
+  const [startDate, setStartDate] = useState(null);
+  const [endDate, setEndDate] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+  const { t, i18n } = useTranslation();
+  const { val, flag, index, setDataCoin, setFlag } = props.value;
 
-    function onClick() {
-        // Check if the start date and end date are not empty
-        if (!startDate || !endDate) return;
+  function getFormatPrice(price) {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+    }).format(price);
+  }
 
-        setIsLoading(true);
+  // ✅ Function to format date to US clock (MM/DD/YYYY, hh:mm AM/PM)
+  function formatToUSClock(date) {
+    if (!date) return "";
+    return new Intl.DateTimeFormat('en-US', {
+      month: '2-digit',
+      day: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+    }).format(date);
+  }
 
-        // Call the search function from the ApiRequest library
-        ApiRequest.search(startDate, endDate, val.tradingPair)
-            .then(res => {
-                if (res.status === 1) {
-                    setDataCoin(res.data); // Set the dataCoin state to the data from the server
-                    setIsLoading(false);
-                    setFlag(!flag);
-                } else {
-                    setError(res.errors[0]);
-                    setIsLoading(false);
-                }
-            })
-            .catch(err => {
-                console.log(err);
-            });
-    }
+  function onClick() {
+    if (!startDate || !endDate) return;
 
-    const isRTL = i18n.language === 'he';
+    setIsLoading(true);
+    ApiRequest.search(startDate, endDate, val.tradingPair)
+      .then(res => {
+        if (res.status === 1) {
+          setDataCoin(res.data);
+          setIsLoading(false);
+          setFlag(!flag);
+        } else {
+          setError(res.errors[0]);
+          setIsLoading(false);
+        }
+      })
+      .catch(err => {
+        console.log(err);
+        setIsLoading(false);
+      });
+  }
 
-    return (       
-          <div
+  const isRTL = i18n.language === 'he';
+
+  return (
+    <div
       className={`bg-gray-800 text-white p-5 rounded-lg shadow-md space-y-3 ${
         isRTL ? 'text-right' : 'text-left'
       }`}
@@ -75,29 +67,13 @@ export default function Coin(props) {
       </h3>
 
       <div>
-        <p>
-          <span className="font-semibold text-blue-300">{t('symbol')}:</span> {val.tradingPair}
-        </p>
-        <p>
-          <span className="font-semibold text-blue-300">{t('closePrice')}:</span> {getFormatPrice(val.currentPrice)}
-        </p>
-        <p>
-          <span className="font-semibold text-blue-300">{t('openPrice')}:</span> {getFormatPrice(val.openingPrice)}
-        </p>
-        <p>
-          <span className="font-semibold text-blue-300">{t('highPrice')}:</span> {getFormatPrice(val.highestPrice24h)}
-        </p>
-        <p>
-          <span className="font-semibold text-blue-300">{t('lowPrice')}:</span> {getFormatPrice(val.lowestPrice24h)}
-        </p>
-        <p>
-          <span className="font-semibold text-blue-300">{t('totalTradedBaseAssetVolume')}:</span>{' '}
-          {getFormatPrice(val.totalTradedVolume)}
-        </p>
-        <p>
-          <span className="font-semibold text-blue-300">{t('totalTradedQuoteAssetVolume')}:</span>{' '}
-          {getFormatPrice(val.totalTradedQuoteVolume)}
-        </p>
+        <p><span className="font-semibold text-blue-300">{t('symbol')}:</span> {val.tradingPair}</p>
+        <p><span className="font-semibold text-blue-300">{t('closePrice')}:</span> {getFormatPrice(val.currentPrice)}</p>
+        <p><span className="font-semibold text-blue-300">{t('openPrice')}:</span> {getFormatPrice(val.openingPrice)}</p>
+        <p><span className="font-semibold text-blue-300">{t('highPrice')}:</span> {getFormatPrice(val.highestPrice24h)}</p>
+        <p><span className="font-semibold text-blue-300">{t('lowPrice')}:</span> {getFormatPrice(val.lowestPrice24h)}</p>
+        <p><span className="font-semibold text-blue-300">{t('totalTradedBaseAssetVolume')}:</span> {getFormatPrice(val.totalTradedVolume)}</p>
+        <p><span className="font-semibold text-blue-300">{t('totalTradedQuoteAssetVolume')}:</span> {getFormatPrice(val.totalTradedQuoteVolume)}</p>
       </div>
 
       {/* Date Inputs */}
@@ -116,6 +92,11 @@ export default function Coin(props) {
             }}
             className="w-full px-3 py-2 bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring focus:ring-blue-400"
           />
+          {startDate && (
+            <p className="text-sm text-gray-400 mt-1">
+              🕒 {t('selected')} (US): {formatToUSClock(startDate)}
+            </p>
+          )}
         </div>
 
         <div>
@@ -132,6 +113,11 @@ export default function Coin(props) {
             }}
             className="w-full px-3 py-2 bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring focus:ring-blue-400"
           />
+          {endDate && (
+            <p className="text-sm text-gray-400 mt-1">
+              🕒 {t('selected')} (US): {formatToUSClock(endDate)}
+            </p>
+          )}
         </div>
       </div>
 
@@ -157,6 +143,5 @@ export default function Coin(props) {
         {error && <p className="text-red-400 font-semibold">{error}</p>}
       </div>
     </div>
-        
-    );
+  );
 }
