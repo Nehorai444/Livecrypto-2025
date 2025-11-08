@@ -77,8 +77,8 @@ export default function Coin(props) {
       </div>
 
       {/* Date Inputs */}
-      <div className="grid md:grid-cols-2 gap-4 mt-4">
-        <div>
+      <div className="grid w-full md:grid-cols-2 gap-4 mt-4">
+        <div className="w-full">
           <label htmlFor="startDate" className="block mb-1 font-semibold text-gray-300">
             {t('startDateLabel')}:
           </label>
@@ -99,7 +99,7 @@ export default function Coin(props) {
           )}
         </div>
 
-        <div>
+        <div className="w-full">
           <label htmlFor="endDate" className="block mb-1 font-semibold text-gray-300">
             {t('endDateLabel')}:
           </label>
