@@ -75,6 +75,7 @@ binanceWebSocket.on('message', async (data) => {
         const newCoin = { tradingPair, coinId: index++ };
         coinCache[tradingPair] = newCoin.coinId;
         await staticCoinModel.insertMany(newCoin);
+        console.log('added')
       }
 
       tickerData[i].coinId = coinCache[tradingPair];
@@ -137,8 +138,9 @@ app.post('/api/searchCoinData', async (req, res) => {
 
 // Serve the React frontend from the correct build folder
 app.get("*", (req, res) => {
-  app.use(express.static(path.resolve(__dirname, "../client/build")));
+  res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
 });
+
 
 // Start the server and listen on the specified port
 server.listen(process.env.PORT, () => {
