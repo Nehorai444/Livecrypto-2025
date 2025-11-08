@@ -24,7 +24,9 @@ const db = require('mongoose');
 require('dotenv').config();
 
 // Connect to MongoDB using Mongoose
-db.connect(process.env.MONGODB_URI).then(() => {
+db.connect(process.env.MONGODB_URI, {
+  dbName: 'livecrypto', // 👈 ensure consistent DB name
+}).then(() => {
   logger.info('DB is on');
 }).catch(err => console.log(err));
 
