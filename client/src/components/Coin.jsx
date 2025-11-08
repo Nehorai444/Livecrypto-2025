@@ -77,8 +77,8 @@ export default function Coin(props) {
       </div>
 
       {/* Date Inputs */}
-      <div className="grid w-full md:grid-cols-2 gap-4 mt-4">
-        <div className="w-full">
+      <div className="w-full flex flex-col md:flex-row md:space-x-4 mt-4 space-y-4 md:space-y-0 overflow-hidden">
+        <div className="flex-1 min-w-0">
           <label htmlFor="startDate" className="block mb-1 font-semibold text-gray-300">
             {t('startDateLabel')}:
           </label>
@@ -86,20 +86,17 @@ export default function Coin(props) {
             type="datetime-local"
             id="startDate"
             name="startDate"
-            onChange={(e) => {
-              const localDate = new Date(e.target.value);
-              setStartDate(localDate);
-            }}
+            onChange={(e) => setStartDate(new Date(e.target.value))}
             className="w-full px-3 py-2 bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring focus:ring-blue-400"
           />
           {startDate && (
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-sm text-gray-400 mt-1 break-words">
               🕒 {t('selected')} (US): {formatToUSClock(startDate)}
             </p>
           )}
         </div>
 
-        <div className="w-full">
+        <div className="flex-1 min-w-0">
           <label htmlFor="endDate" className="block mb-1 font-semibold text-gray-300">
             {t('endDateLabel')}:
           </label>
@@ -107,19 +104,17 @@ export default function Coin(props) {
             type="datetime-local"
             id="endDate"
             name="endDate"
-            onChange={(e) => {
-              const localDate = new Date(e.target.value);
-              setEndDate(localDate);
-            }}
+            onChange={(e) => setEndDate(new Date(e.target.value))}
             className="w-full px-3 py-2 bg-gray-700 text-white rounded-md border border-gray-600 focus:outline-none focus:ring focus:ring-blue-400"
           />
           {endDate && (
-            <p className="text-sm text-gray-400 mt-1">
+            <p className="text-sm text-gray-400 mt-1 break-words">
               🕒 {t('selected')} (US): {formatToUSClock(endDate)}
             </p>
           )}
         </div>
       </div>
+
 
       {/* Action & Feedback */}
       <div className="mt-4 space-y-2">
