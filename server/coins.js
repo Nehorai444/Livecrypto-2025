@@ -25,10 +25,14 @@ require('dotenv').config();
 
 // Connect to MongoDB using Mongoose
 db.connect(process.env.MONGODB_URI, {
-  dbName: 'livecrypto', // 👈 ensure consistent DB name
-}).then(() => {
-  logger.info('DB is on');
-}).catch(err => console.log(err));
+  dbName: "livecrypto",
+})
+.then(() => {
+  logger.info("✅ DB connected");
+})
+.catch((err) => {
+  logger.error("❌ DB connection failed:", err);
+});
 
 // Mongoose Schema for the staticCoinTable collection
 const staticCoinScheme = new db.Schema({

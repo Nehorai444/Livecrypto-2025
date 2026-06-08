@@ -1,78 +1,93 @@
-import { useState, useEffect } from 'react';
-import './Index.css';
-import { Routes, Route } from 'react-router-dom';
-import Menu from './components/Menu';
-import HomePage from './components/HomePage';
-import CoinsList from './components/CoinsList';
-import { useTranslation } from 'react-i18next';
-import Header from './components/Header';
-import pako from 'pako';
-import ThemeToggle from './components/ThemeToggle';
+import { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import pako from "pako";
+
+import "./Index.css";
+
+import Menu from "./components/Menu";
+import Header from "./components/Header";
+import HomePage from "./components/HomePage";
+import CoinsList from "./components/CoinsList";
+import ThemeToggle from "./components/ThemeToggle";
 
 function App() {
   const [data, setData] = useState([]);
   const { t } = useTranslation();
 
-
   useEffect(() => {
-    // Determine WebSocket protocol
-    const wsProtocol = window.location.protocol === "https:" ? "wss://" : "ws://";
-    const wsHost = window.location.hostname;
-    const ws = new WebSocket(`${wsProtocol}${wsHost}/`);
+    const WS_URL =
+      import.meta.env.VITE_WS_URL ||
+      "ws://localhost:8080";
 
+    const socket = new WebSocket(WS_URL);
 
+    socket.binaryType = "arraybuffer";
 
-    ws.binaryType = 'arraybuffer'; // Set binary type for WebSocket
-
-    ws.onopen = () => {
-      console.log('Connected to WebSocket server.');
+    socket.onopen = () => {
+      console.log("✅ Connected:", WS_URL);
     };
 
-    ws.onmessage = (event) => {
-      const data = event.data;
-      if (data !== undefined) {
-        
-        try {
-          const inflatedData = pako.inflate(data, { to: 'string' }); // decompression
-          setData(JSON.parse(inflatedData)); // Set the data state to the data from the server
-          } catch (error) {
-            console.error('Error parsing JSON:', error);
-        }
+    socket.onmessage = (event) => {
+      try {
+        const decompressed = pako.inflate(event.data, {
+          to: "string",
+        });
 
+        const jsonData = JSON.parse(decompressed);
+
+        setData(jsonData);
+      } catch (err) {
+        console.error(
+          "❌ Error parsing websocket message:",
+          err
+        );
       }
     };
 
-    // Add event listener for beforeunload event to close WebSocket connection
-    const handleBeforeUnload = () => {
-      ws.close();
+    socket.onerror = (err) => {
+      console.error("❌ WebSocket Error:", err);
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    socket.onclose = (event) => {
+      console.log(
+        `🔌 Connection closed (${event.code})`
+      );
+    };
 
-    // Cleanup function to remove event listener and close WebSocket connection
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
-      ws.close();
+      socket.close();
     };
   }, []);
 
   useEffect(() => {
-    document.title = "LiveCrypto"
-  }, [])
+    document.title = "LiveCrypto";
+  }, []);
+
   return (
     <div className="App">
       <header className="flex justify-between items-center px-6 py-4 bg-white dark:bg-gray-900">
-        <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">Livecrypto</h1>
+        <h1 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+          LiveCrypto
+        </h1>
+
         <ThemeToggle />
       </header>
+
       <Menu />
       <Header />
+
       <Routes>
-        <Route path="/allCoins" element={<CoinsList data={data} />} />
-        <Route path="/" element={<HomePage data={data} />} />
+        <Route
+          path="/"
+          element={<HomePage data={data} />}
+        />
+
+        <Route
+          path="/allCoins"
+          element={<CoinsList data={data} />}
+        />
       </Routes>
-
-
     </div>
   );
 }
